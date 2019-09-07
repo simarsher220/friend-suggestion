@@ -37,7 +37,9 @@
 	</dependencies>
 
 	<build>
+		<finalName>spring-boot-in-docker</finalName>
 		<plugins>
+			<!-- This is needed if deploying with embedded server -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>

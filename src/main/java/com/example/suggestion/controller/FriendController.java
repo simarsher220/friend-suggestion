@@ -1,9 +1,8 @@
 package com.example.suggestion.controller;
 
 import com.example.suggestion.mapper.FriendMapper;
-import com.example.pcap.model.*;
-import com.example.suggestion.service.FriendService;
 import com.example.suggestion.model.*;
+import com.example.suggestion.service.FriendService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
