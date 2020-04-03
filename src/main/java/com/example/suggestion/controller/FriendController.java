@@ -19,6 +19,12 @@ public class FriendController {
         this.friendService = friendService;
     }
 
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @ApiOperation("Add a user to our social media platform")
+    public String helloWorld() {
+        return "Hello World!";
+    }
+
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ApiOperation("Add a user to our social media platform")
     public ResponseEntity createUser(@RequestBody User user) {
