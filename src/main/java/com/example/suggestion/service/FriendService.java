@@ -4,6 +4,7 @@ import com.example.suggestion.error.exception.CustomException;
 import com.example.suggestion.model.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.*;
 
@@ -29,7 +30,7 @@ public class FriendService {
         List<String> friends = new ArrayList<>();
         List<String> requests = graph.get(userA);
         if (requests == null) {
-            return friends;
+            throw new CustomException("no friends found!", HttpStatus.NOT_FOUND);
         }
         for (String request : requests) {
             List<String> requestsSentByOthers = graph.get(request);
@@ -39,6 +40,9 @@ public class FriendService {
             if (requestsSentByOthers.contains(userA)) {
                 friends.add(request);
             }
+        }
+        if (CollectionUtils.isEmpty(friends)) {
+            throw new CustomException("no friends found!", HttpStatus.NOT_FOUND);
         }
         return friends;
     }
@@ -52,6 +56,9 @@ public class FriendService {
             if (requestsSentByOthers.contains(userA) && (requestsSentByMe == null || !requestsSentByMe.contains(requestsSentByOthersPair.getKey()))) {
                 friendRequests.add(requestsSentByOthersPair.getKey());
             }
+        }
+        if (CollectionUtils.isEmpty(friendRequests)) {
+            throw new CustomException("no pending requests!", HttpStatus.NOT_FOUND);
         }
         return friendRequests;
     }
